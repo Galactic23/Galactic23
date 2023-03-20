@@ -4,14 +4,22 @@ const a = require('./albums');
 const s = require('./songs')
 
 url = "https://kgasa.com/album/page/";
-//const album = [];
+songs = [];
+album = [];
 
 app.get('/', (req, res) => {
     res.json('Welcome to Korean Lyric API')
 }) 
 
-a.getData(url).then(data => album = data); //album extraction
+//a.getData(url).then(data => album = data.array1); //album extraction
+//a.getData(url).then(data => album = data.array1);
 s.getData1();
+album = a.album;
+songs = s.songs;
+//songs = s.getData1();
+
+//console.log(songs)
+
    
 app.get('/album', (req, res) => 
 {

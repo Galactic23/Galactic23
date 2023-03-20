@@ -2,8 +2,8 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 
 const total_pages = [];
-const s = [];
-album = []; 
+const album = []; //or no const
+const song_links = [];
 names = [];
 links = [];
 genre = [];
@@ -72,8 +72,9 @@ async function getData(url)
                 release.push('N/A');
                 artist.push('Various Artists');
 
-                temp_song_name = $('#genesis-content > article > div > figure:nth-child(11) > table > tbody > tr > td:nth-child(1) a').get().map(x => $(x).text());
-                song_name.push(temp_song_name);
+                temp_song_name = $('#genesis-content > article > div > figure:nth-child(11) > table > tbody > tr > td:nth-child(1) a').get().map(x => $(x).attr('href'));
+                //song_name.push(temp_song_name);
+                song_name = song_name.concat(temp_song_name);
             }
            
             else
@@ -99,13 +100,15 @@ async function getData(url)
                 //write code here concept: if table 2 does not exist, run needed code; else do code from below
                 if ($('.wp-block-table table').length == 1)
                 {
-                    temp_song_name = $('.entry-content ol li a').get().map(x => $(x).text());
-                    song_name.push(temp_song_name);
+                    temp_song_name = $('.entry-content ol li a').get().map(x => $(x).attr('href'));
+                    //song_name.push(temp_song_name);
+                    song_name = song_name.concat(temp_song_name);
                 }
                 else
                 {
-                    temp_song_name = (e('td:nth-child(2) a').get().map(x => e(x).text()));
-                    song_name.push(temp_song_name);
+                    temp_song_name = (e('td:nth-child(2) a').get().map(x => e(x).attr('href')));
+                    //song_name.push(temp_song_name);
+                    song_name = song_name.concat(temp_song_name);
                 }
                 //song_name.push(temp_song_name);
                 //song_name = song_name.concat(temp_song_name);
@@ -123,19 +126,25 @@ async function getData(url)
     console.log(song_name.length);
     console.log(names.length);
 
+    for (let i = 0; i < song_name.length; i++)
+    {
+        song_links.push(song_name[i]);
+    }
+
     for (let i = 0; i < names.length; i++)
     {
         //tmp = tmp.concat(song_name[i]);
-        s.push(song_name[i]);
+        //s.push(tmp);
 
         album.push({ID: id[i], Album: names[i], Link: links[i], Cover: cover[i], Genre: genre[i], Artist: artist[i], Release: release[i] });
         
         //album.push({Album: names[i], Link: links[i], Cover: cover[i], Genre: genre[i], Artist: artist[i], Release: release[i], Songs: [{Name: s }] });
         //album.push({Album: names[i], Link: links[i], Cover: cover[i], Genre: genre[i], Artist: artist[i], Release: release[i], Songs: { Name: song_name[i]}});
     }
-    console.log('Complete');
-    return album;
+    console.log('Albums Complete');
+    //return album;
+    return { array1: album, array2: song_links }
 }
 
-module.exports = { getData, s: s};
-//module.exports = {s: s};
+module.exports = { getData, song_links, album};
+
