@@ -3,7 +3,7 @@ const axios = require('axios');
 const a = require('./albums');
 
 const songs = [];
-//info = [];
+info = [];
 s_links = [];
 s_name = [];
 s_album = [];
@@ -33,13 +33,12 @@ async function getData1()
             temp_info = $('.wp-block-table td:nth-child(2)').get().map(x => $(x).text());
             info = info.concat(temp_info);
             
-            s_album.push(info[0]);
-            s_genre.push(info[1]);
-            s_label.push(info[2]);
-            s_release.push(info[3]);
-            s_language.push(nfo[4]);
+            s_album.push(temp_info[0]);
+            s_genre.push(temp_info[1]);
+            s_label.push(temp_info[2]);
+            s_release.push(temp_info[3]);
+            s_language.push(temp_info[4]);
             
-            info = [];
         }
         catch (error)
         {
