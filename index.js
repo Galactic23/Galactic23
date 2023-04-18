@@ -1,7 +1,7 @@
 const app = require('express')();
 const PORT = 8080;
 const a = require('./albums');
-const s = require('./songs')
+const s = require('./songs');
 
 url = "https://kgasa.com/album/page/";
 songs = [];
