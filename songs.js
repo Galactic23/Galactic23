@@ -3,6 +3,7 @@ const axios = require('axios');
 const a = require('./albums');
 
 const songs = [];
+const hangul_kanji = /(?:[\u3131-\uD79D]+)|(?:[一-龠]+|[ぁ-ゔ]+|[ァ-ヴー]+|[々〆〤ヶ]+)/;
 info = [];
 s_links = [];
 s_name = [];
@@ -65,6 +66,7 @@ async function getData1()
             temp_artists = ($('.entry-content h2').last().text());
             s_artist.push(temp_artists);
 
+            $('.entry-content p:not([class])').find('br').replaceWith('\n');  //add new line when <br> exists
             total_lyrics = $('.entry-content h3').get().map(x => $(x).text());
 
             if (total_lyrics.length == 4)
@@ -73,32 +75,19 @@ async function getData1()
 
                 if (head_indentity.includes('ROMANIZED') || head_indentity.includes('ROMAJI'))
                 {
-                    lyr_all = $('.entry-content p:not([class])').find('br').replaceWith(' ').end().get().map((e) => $(e).text());
-                    lyr_size = lyr_all.length;
+                    $('.entry-content h3').get().map((e, count = 0) => $(e).addClass(count.toString()), count++); //give all h3 tags a unique class name
 
-                    if (lyr_all[lyr_size - 1].includes('Translation'))
-                    {
-                        lyr_all.pop();
-                        lyr_size = lyr_all.length;
-                    }
+                    temp_rom = $('.0').nextUntil('.2').addBack().next('p:not([class])').text(); //lyrics for romanized 
+                    temp_han = $('.2').nextUntil('.3').addBack().next('p:not([class])').text(); //lyrics for hangul
+                    temp_eng = $('.3').nextUntil('div').addBack().next('p:not([class])').text(); //lyrics for english
 
-                    split_lyric = lyr_size / 3;
-
-                    for (let i = 0; i < split_lyric; i += split_lyric)
-                    {
-                        temp_rom = lyr_all.slice(i, split_lyric);
-                        next = split_lyric*2;
-                        temp_han = lyr_all.slice(split_lyric, next);
-                        last = (split_lyric*3);
-                        temp_eng = lyr_all.slice(next, last)
-                    }
-                    rom_str = temp_rom.join(' ');
-                    han_str = temp_han.join(' ');
-                    eng_str = temp_eng.join(' ');
+                    //rom_str = temp_rom.join(' ');
+                    //han_str = temp_han.join(' ');
+                    //eng_str = temp_eng.join(' ');
                     
-                    s_romanized.push(rom_str);
-                    s_hangul.push(han_str);
-                    s_english.push(eng_str);
+                    s_romanized.push(temp_rom);
+                    s_hangul.push(temp_han);
+                    s_english.push(temp_eng);
                 }
             }
             //else if (total_lyrics.length == 2)
@@ -109,43 +98,32 @@ async function getData1()
             //}
             else
             {
-                head_indentity = $('.entry-content h3').first().text();
+                $('.entry-content h3').get().map((e, count = 0) => $(e).addClass(count.toString()), count++);
 
-                if (head_indentity.includes('ENGLISH') || head_indentity.includes('English'))
+                head_indentity = $('.0').text();
+
+                if (head_indentity.includes('ENGLISH') || head_indentity.includes('English') || head_indentity.includes('Lyrics'))
                 {
-                    lyr_all = $('.entry-content p:not([class])').find('br').replaceWith(' ').end().get().map((e) => $(e).text());
-                    eng_str = lyr_all.join(' ');
+                    temp_eng = $('.0').nextUntil('.code-block-2').addBack().next('p:not([class])').text();
 
-                    s_english.push(eng_str);
+                    s_english.push(temp_eng);
 
                     s_hangul.push('Unavailable');
                     s_romanized.push('Unavailable');
                 }
                 else if (head_indentity.includes('HANGUL') || head_indentity.includes('歌詞'))
                 {
-                    lyr_all = $('.entry-content p:not([class])').find('br').replaceWith(' ').end().get().map((e) => $(e).text());
-                    han_str = lyr_all.join(' ');
+                    temp_han = $('.0').nextUntil('.code-block-2').addBack().next('p:not([class])').text();
 
-                    s_hangul.push(han_str);
+                    s_hangul.push(temp_han);
 
                     s_english.push('Unavailable');
                     s_romanized.push('Unavailable');
                 }
-                else if (head_indentity.includes('ROMANIZED') || head_indentity.includes('ROMAJI'))
-                {
-                    lyr_all = $('.entry-content p:not([class])').find('br').replaceWith(' ').end().get().map((e) => $(e).text());
-                    rom_str = lyr_all.join(' ');
-
-                    s_romanized.push(rom_str);
-
-                    s_english.push('Unavailable');
-                    s_hangul.push('Unavailable');
-                }
 
             }
 
-            //temp_lyrics = $('.entry-content p').text()
-            //s_lyrics.push(temp_lyrics);
+            total_lyrics = [];
         }
         catch (error)
         {
@@ -153,7 +131,7 @@ async function getData1()
         }
     }
 
-
+    //change name to h1
 
     for (let i = 0; i < a.song_links.length; i++)
     {
