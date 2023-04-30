@@ -20,7 +20,7 @@ async function getData(url)
     page = true;
     let counter = 1;
     while(page)
-    {
+    {     
         temp = url + String(counter); //https://kgasa.com/album/page/1
         try 
         {
