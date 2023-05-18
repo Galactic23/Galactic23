@@ -34,7 +34,7 @@ async function getData1()
             temp = ($('.entry-content h2').first().text()); //locating table with album info
             temp = temp.replace(" Lyrics", "");
 
-            s_name.push(temp);
+            s_name.push(temp); //need to rewrite... have to get name from the title
 
             condition = $('.wp-block-table table:nth-child(1) td:nth-child(2)').get().map(x => $(x).text());
 
@@ -45,6 +45,11 @@ async function getData1()
                 //a_link = $('.wp-block-table.is-style-stripes td:nth-child(2)').first().attr('href');
             
                 //s_album.push(a_link);
+                if (temp_info[0].includes('MONSTA'))
+                {
+
+                }
+
                 s_genre.push(temp_info[2]);
                 s_label.push(temp_info[3]);
                 s_release.push(temp_info[4]);
@@ -73,7 +78,7 @@ async function getData1()
             {
                 head_indentity = $('.entry-content h3').first().text();
 
-                if (head_indentity.includes('ROMANIZED') || head_indentity.includes('ROMAJI'))
+                if (head_indentity.includes('ROMANIZED') || head_indentity.includes('ROMAJI') || head_indentity.includes('Romanized') || head_indentity.includes('Romaji'))
                 {
                     $('.entry-content h3').get().map((e, count = 0) => $(e).addClass(count.toString()), count++); //give all h3 tags a unique class name
 
@@ -89,6 +94,19 @@ async function getData1()
                     s_hangul.push(temp_han);
                     s_english.push(temp_eng);
                 }
+                else if (head_indentity.includes('English') || head_indentity.includes('ENGLISH'))
+                {
+                    $('.entry-content h3').get().map((e, count = 0) => $(e).addClass(count.toString()), count++); //give all h3 tags a unique class name
+
+                    temp_eng = $('.0').nextUntil('.2').addBack().next('p:not([class])').text(); //lyrics for english
+                    temp_han = $('.2').nextUntil('.3').addBack().next('p:not([class])').text(); //lyrics for hangul
+                    temp_rom = $('.3').nextUntil('div').addBack().next('p:not([class])').text(); //lyrics for romanized
+
+                    s_english.push(temp_eng);
+                    s_hangul.push(temp_han);
+                    s_romanized.push(temp_rom);
+                }
+                else if () //if h2 is greater than 2
             }
             //else if (total_lyrics.length == 2)
             //{
@@ -102,7 +120,7 @@ async function getData1()
 
                 head_indentity = $('.0').text();
 
-                if (head_indentity.includes('ENGLISH') || head_indentity.includes('English') || head_indentity.includes('Lyrics'))
+                if (head_indentity.includes('ENGLISH') || head_indentity.includes('English') || head_indentity.includes('Lyrics') || head_indentity.includes('LYRICS'))
                 {
                     temp_eng = $('.0').nextUntil('.code-block-2').addBack().next('p:not([class])').text();
 
@@ -132,6 +150,10 @@ async function getData1()
     }
 
     //change name to h1
+    //at index 5726 of json file, lyrics get scrambled (Monsta X - RUSH HOUR) 
+    //error occurs since title heading for lyric order is from English, Hangul and Romanized instead of Romanized, Hangul and English
+    //1255 songs extracted out of 1268
+    //1235
 
     for (let i = 0; i < a.song_links.length; i++)
     {
