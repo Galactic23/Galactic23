@@ -11,17 +11,18 @@
   "license": "ISC",
   "dependencies": {
     "@supabase/supabase-js": "^2.22.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "axios": "^1.3.0",
     "cheerio": "^1.0.0-rc.12",
     "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2",
     "react-scripts": "^5.0.1",
     "regex": "^0.1.1",
     "request": "^2.88.2",
-<<<<<<< HEAD
-    "supabase": "^1.62.1",
-    "web-vitals": "^3.3.1"
-=======
     "supabase": "^1.62.1"
->>>>>>> 5fa1806cf296acf96bef7122b297eb5e003260cb
   }
 }
