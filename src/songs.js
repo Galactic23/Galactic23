@@ -163,6 +163,8 @@ async function getData1()
         songs.push({ Name: s_name[i], Links: s_links[i], Album: s_album[i], Genre: s_genre[i], Artist: s_artist[i], Label: s_label[i], Release: s_release[i], Language: s_language[i], English_Lyrics: s_english[i], Hangul_Lyrics: s_hangul[i], Romanized_Lyrics: s_romanized[i]})
     }
     console.log('Songs Complete')
+
+    insertData();
 }
 
 module.exports = { getData1, songs};
