@@ -7,12 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "devStart": "nodemon server.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.24.0",
     "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
+    "node": "^20.2.0",
+    "nodemon": "^2.0.22",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "regex": "^0.1.1",
