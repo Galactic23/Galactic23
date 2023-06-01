@@ -20,7 +20,6 @@ let id = [];
 //const getData = async url => 
 export async function getData(url)
 {
-    console.log('this is the url:',url);
     let page = true;
     let counter = 1;
     while(page)
