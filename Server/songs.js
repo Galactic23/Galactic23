@@ -43,9 +43,8 @@ export async function getData1(url)
             //temp = temp.replace(" Lyrics", "");
             let temp = ($('.entry-header h1').first().text());
             console.log(temp);
-            
-            temp = temp.split(' – ');
 
+            temp = temp.split('&nbsp;– ');
 
             let temp2 = temp[1];
             temp2 = temp2.replace(" Lyrics", '');
