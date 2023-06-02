@@ -61,7 +61,12 @@ export async function getData1(url)
                 $('.entry-content h2').last().each((i, item) => (item.tagName = 'h3'))
                 console.log('Song found'); //json index 11043 song Nectar by WayV
                 //Genre, Label, Release, and Language Missing at index 14163 and forward of json
+                //song links get mixed at index 6948 Shadow of You
             }
+            //else if(temp2.includes('WAITING'))
+            //{
+            //   console.log('Song found');
+            //}
 
             //s_name.push(temp); //need to rewrite... have to get name from the title
 
@@ -202,7 +207,7 @@ export async function getData1(url)
             console.log(error);
         }
     }
-    //1255 songs extracted out of 1268
+    //1250 songs extracted out of 1269
     //1235
 
     for (let i = 0; i < s_links.length; i++)
