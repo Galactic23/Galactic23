@@ -1,5 +1,6 @@
 import { load } from 'cheerio';
 import axios from 'axios';
+import config from './https-cfg.js';
 
 //const cheerio = require('cheerio');
 //const axios = require('axios');
@@ -27,7 +28,7 @@ export async function getData(url)
         let temp = url + String(counter); //https://kgasa.com/album/page/1
         try 
         {
-            const response = await axios.get(temp);
+            const response = await axios.get(temp, config);
             const data = response.data;
             const $ = load(data);
 
@@ -59,7 +60,7 @@ export async function getData(url)
     {
         try
         {
-            const response = await axios.get(links[i]);
+            const response = await axios.get(links[i], config);
             const data = response.data;
             const $ = load(data);
             let count = [];

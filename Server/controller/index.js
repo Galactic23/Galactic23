@@ -2,7 +2,7 @@ import express from 'express';
 import { getData1 } from './songs.js';
 import { album } from './albums.js';
 import { songs } from './songs.js';
-import supabase from '../APIs/supabaseClient.js'
+//import supabase from '../Client/APIs/supabaseClient.js'
 
 const app = express();
 const PORT = 8080;
