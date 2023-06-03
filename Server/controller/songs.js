@@ -6,8 +6,6 @@ import { song_album } from './albums.js';
 import config from './https-cfg.js';
 
 const songs = [];
-const hangul_kanji = /(?:[\u3131-\uD79D]+)|(?:[一-龠]+|[ぁ-ゔ]+|[ァ-ヴー]+|[々〆〤ヶ]+)/;
-let info = [];
 let s_links = [];
 let s_name = [];
 let s_album = [];
@@ -25,7 +23,7 @@ export async function getData1(url)
     await getData(url);
 
     s_links = song_links;
-    s_album = song_album;
+    s_album = song_album; //1275
     
     for (let i = 0; i < s_links.length; i++)
     {
@@ -48,14 +46,14 @@ export async function getData1(url)
             s_name.push(temp2);
             s_artist.push(t[0]); 
 
-            console.log(s_artist[i], ' - ', s_name[i]);
+            console.log('Song #' + String(i) + ':', s_artist[i], ' - ', s_name[i]);
 
             if (temp2.includes('Wishes') || temp2.includes('Anymore')) //using this to debug
             {
                 $('.entry-content h2').last().each((i, item) => (item.tagName = 'h3'))
-                console.log('Song found'); //json index 14605 song Merry Go Round Jap Ver. Izone (Oneiri Diary)
+                //console.log('Song found'); //json index 14566 song Merry Go Round Jap Ver. Izone (Oneiri Diary)
             }
-
+            
             let condition = $('.wp-block-table table').first().find('td:nth-child(2)').get().map(x => $(x).text());
 
             if (condition.length == 6) //if table has 6 elements (Single, Album, Genre, Label, Release Date, Language)
@@ -77,10 +75,20 @@ export async function getData1(url)
             }
             else if (condition.length == 5) //table with 5 elements (Album, Genre, Label, Release Date, Language)
             {
-                s_genre.push(condition[1]);
-                s_label.push(condition[2]);
-                s_release.push(condition[3]);
-                s_language.push(condition[4]);
+                if (s_links[i] == 'https://kgasa.com/yongzoo-maze/')
+                {
+                    s_genre.push(condition[1]);
+                    s_label.push(condition[3]);
+                    s_release.push(condition[2]);
+                    s_language.push(condition[4]);
+                }
+                else
+                {
+                    s_genre.push(condition[1]);
+                    s_label.push(condition[2]);
+                    s_release.push(condition[3]);
+                    s_language.push(condition[4]);
+                }
             }
             else if (condition.length == 7) //table with 7 elements (Artist, Single, Album, Genre, Label, Release, Language)
             {
@@ -94,6 +102,7 @@ export async function getData1(url)
             $('.entry-content p:not([class])').find('br').replaceWith('\n');  //add new line when <br> exists
             let total_lyrics = $('.entry-content h3').get().map(x => $(x).text());
             let h2_size = $('.entry-content h2').get().map(x => $(x).text());
+            
 
             if (total_lyrics.length == 4) //if h3 size == 4
             {
@@ -199,6 +208,14 @@ export async function getData1(url)
                     s_english.push(temp_eng);
                     s_hangul.push(temp_han);
                     s_romanized.push(temp_rom);
+                }
+                else if (head_indentity == 'Maze Lyrics')
+                {
+                    let temp_eng = $('h3').nextUntil('figure').addBack().next('p:not([class])').text(); //lyrics for english
+
+                    s_english.push(temp_eng);
+                    s_hangul.push('Unavailable');
+                    s_romanized.push('Unavailable');
                 }
             }
             else if (total_lyrics.length == 2 || total_lyrics.length == 3) //if h3 size == 2 
