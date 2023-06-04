@@ -68,7 +68,7 @@ export async function getData(url)
             let table_info = $('.wp-block-table').first().find('td:nth-child(2)').get().map(x => $(x).text());
             let total_tables = $('.wp-block-table table').length;
     
-            if (temp.includes('OST'))
+            if (temp.includes('OST') || temp.includes('Soundtrack'))
             {
                 a_genre.push('OST');
                 a_artists.push('Various Artists');
