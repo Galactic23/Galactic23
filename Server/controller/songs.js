@@ -4,6 +4,8 @@ import { getData } from './albums.js';
 import { song_links } from './albums.js';
 import { song_album } from './albums.js';
 import config from './https-cfg.js';
+import { insertSongsIntoTable } from '../supabase.js';
+import { a_id } from './albums.js';
 
 const songs = [];
 let s_links = [];
@@ -256,9 +258,10 @@ export async function getData1(url)
 
     for (let i = 0; i < s_links.length; i++)
     {
-        songs.push({ Name: s_name[i], Links: s_links[i], Album: s_album[i], Genre: s_genre[i], Artist: s_artist[i], Label: s_label[i], Release: s_release[i], Language: s_language[i], English_Lyrics: s_english[i], Hangul_Lyrics: s_hangul[i], Romanized_Lyrics: s_romanized[i]})
+        songs.push({ ID: i, Album_ID: a_id[i], Name: s_name[i], Links: s_links[i], Album: s_album[i], Genre: s_genre[i], Artist: s_artist[i], Label: s_label[i], Release: s_release[i], Language: s_language[i], English_Lyrics: s_english[i], Hangul_Lyrics: s_hangul[i], Romanized_Lyrics: s_romanized[i]})
     }
     console.log('Songs Complete');
+    insertSongsIntoTable();
 
 }
 export { songs };

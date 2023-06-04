@@ -1,18 +1,20 @@
 import { load } from 'cheerio';
 import axios from 'axios';
 import config from './https-cfg.js';
+import { insertAlbumsIntoTable } from '../supabase.js';
 
 const total_pages = [];
 const album = [];
 const song_links = [];
 const song_album = [];
+const album_id = [];
 let a_names = [];
 let a_links = [];
 let a_genre = [];
 let a_cover = [];
 let a_artists = [];
 let a_release = [];
-let a_id = [];
+const a_id = [];
 let songs = [];
 
 export async function getData(url)
@@ -69,7 +71,7 @@ export async function getData(url)
             if (temp.includes('OST'))
             {
                 a_genre.push('OST');
-                a_artists.push('Various a_artistss');
+                a_artists.push('Various Artists');
                 a_release.push('N/A');
 
                 //gets all songs from the table
@@ -140,7 +142,9 @@ export async function getData(url)
         album.push({ID: a_id[i], Name: a_names[i], Album: a_links[i], Cover: a_cover[i], Genre: a_genre[i], Artist: a_artists[i], Release: a_release[i] });
     }
     console.log('Albums Complete');
+    insertAlbumsIntoTable();
 }
-export { album }
+export { album };
 export { song_links, song_album };
+export { a_id };
 
