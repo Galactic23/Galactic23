@@ -62,7 +62,7 @@ export async function getData(url)
             const $ = load(data);
             let count = [];
 
-            a_id.push(a_links.length - i);
+            a_id.push(a_links.length - i); //1273
 
             let temp = $('.entry-title').first().text();
             let table_info = $('.wp-block-table').first().find('td:nth-child(2)').get().map(x => $(x).text());
@@ -81,6 +81,7 @@ export async function getData(url)
                 {
                     songs.push(song_table[x])
                     song_album.push(a_links[i]);
+                    album_id.push(a_id[i]);
                 }
             }
             else if (total_tables == 2)
@@ -101,6 +102,7 @@ export async function getData(url)
                     {
                         songs.push(song_table[x]);
                         song_album.push(a_links[i]);
+                        album_id.push(a_id[i]);
                     }
                     
                 }
@@ -117,6 +119,7 @@ export async function getData(url)
                 {
                     songs.push(song_list[x]);
                     song_album.push(a_links[i]);
+                    album_id.push(a_id[i]);
                 }
             }
 
@@ -146,5 +149,5 @@ export async function getData(url)
 }
 export { album };
 export { song_links, song_album };
-export { a_id };
+export { album_id };
 
