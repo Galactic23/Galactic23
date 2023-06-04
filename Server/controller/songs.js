@@ -26,7 +26,6 @@ export async function getData1(url)
 
     s_links = song_links;
     s_album = song_album; //1275
-    console.log(album_id.length);
     
     for (let i = 0; i < s_links.length; i++)
     {
