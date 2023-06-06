@@ -3,7 +3,7 @@ import { album_arr, songs_arr } from './controller/index.js';
 
 export const insertAlbumsIntoTable = async () => {
   try {
-    const { data, error } = await supabase.from("Albums").upsert(album_arr);
+    const { data, error } = await supabase.from("import_album").upsert(album_arr);
     if (error) {
       console.error("Error inserting data into table 1:", error);
     } else {

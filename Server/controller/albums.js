@@ -142,7 +142,7 @@ export async function getData(url)
 
     for (let i = 0; i < a_names.length; i++)
     {
-        album.push({ID: a_id[i], Name: a_names[i], Album: a_links[i], Cover: a_cover[i], Genre: a_genre[i], Artist: a_artists[i], Release: a_release[i] });
+        album.push({id: a_id[i], name: a_names[i], album: a_links[i], cover: a_cover[i], genre: a_genre[i], artist: a_artists[i], release: a_release[i] });
     }
     console.log('Albums Complete');
     insertAlbumsIntoTable();
