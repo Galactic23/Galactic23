@@ -6,7 +6,8 @@ import { insertAlbumImports } from '../supabase.js';
 const total_pages = [];
 const album = [];
 const song_links = [];
-const song_album = [];
+const song_album_link = [];
+const song_album_name = [];
 const album_id = [];
 let a_names = [];
 let a_links = [];
@@ -80,7 +81,8 @@ export async function getData(url)
                 for (let x = 0; x < song_table.length; x++)
                 {
                     songs.push(song_table[x])
-                    song_album.push(a_links[i]);
+                    song_album_name.push(a_names[i]);
+                    song_album_link.push(a_links[i]);
                     album_id.push(a_id[i]);
                 }
             }
@@ -101,7 +103,8 @@ export async function getData(url)
                     else
                     {
                         songs.push(song_table[x]);
-                        song_album.push(a_links[i]);
+                        song_album_name.push(a_names[i]);
+                        song_album_link.push(a_links[i]);
                         album_id.push(a_id[i]);
                     }
                     
@@ -118,7 +121,8 @@ export async function getData(url)
                 for (let x = 0; x < song_list.length; x++)
                 {
                     songs.push(song_list[x]);
-                    song_album.push(a_links[i]);
+                    song_album_name.push(a_names[i]);
+                    song_album_link.push(a_links[i]);
                     album_id.push(a_id[i]);
                 }
             }
@@ -145,9 +149,9 @@ export async function getData(url)
         album.push({id: a_id[i], name: a_names[i], album: a_links[i], cover: a_cover[i], genre: a_genre[i], artist: a_artists[i], release: a_release[i] });
     }
     console.log('Albums Complete');
-    insertAlbumImports();
+    await insertAlbumImports();
 }
 export { album };
-export { song_links, song_album };
+export { song_links,  song_album_name, song_album_link };
 export { album_id };
 
