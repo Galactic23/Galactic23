@@ -1,8 +1,6 @@
 import { load } from 'cheerio';
 import axios from 'axios';
-import { getData } from './albums.js';
-import { song_links } from './albums.js';
-import { song_album } from './albums.js';
+import { song_links, song_album_name, song_album_link, getData } from './albums.js';
 import config from './https-cfg.js';
 import { insertSongImports } from '../supabase.js';
 import { album_id } from './albums.js';
@@ -10,7 +8,9 @@ import { album_id } from './albums.js';
 const songs = [];
 let s_links = [];
 let s_name = [];
-let s_album = [];
+let s_cover = [];
+let s_album_name = [];
+let s_album_link = [];
 let s_genre = [];
 let s_label = [];
 let s_release = [];
@@ -25,7 +25,8 @@ export async function getData1(url)
     await getData(url);
 
     s_links = song_links;
-    s_album = song_album; //1275
+    s_album_name = song_album_name;
+    s_album_link = song_album_link;
     
     for (let i = 0; i < s_links.length; i++)
     {
@@ -60,7 +61,7 @@ export async function getData1(url)
 
             if (condition.length == 6) //if table has 6 elements (Single, Album, Genre, Label, Release Date, Language)
             {
-                if (s_album[i] == 'https://kgasa.com/album/bts-map-of-the-soul-7-the-journey/')
+                if (s_album_link[i] == 'https://kgasa.com/album/bts-map-of-the-soul-7-the-journey/')
                 {
                     s_genre.push('J-Pop');  //temp_info[2]
                     s_label.push('HYBE');  //temp_info[3]
@@ -247,8 +248,10 @@ export async function getData1(url)
                 }
 
             }
-
             total_lyrics = [];
+
+            let img = ($('.singular-image').attr('data-src'));
+            s_cover.push(img);
         }
         catch (error)
         {
@@ -258,7 +261,7 @@ export async function getData1(url)
 
     for (let i = 0; i < s_links.length; i++)
     {
-        songs.push({ id: i + 1, name: s_name[i], link: s_links[i], album: s_album[i], genre: s_genre[i], artist: s_artist[i], label: s_label[i], release: s_release[i], language: s_language[i], english_lyric: s_english[i], hangul_lyric: s_hangul[i], romanized_lyric: s_romanized[i]})
+        songs.push({ id: i + 1, name: s_name[i], link: s_links[i], cover: s_cover[i], album_name: s_album_name[i], album_link: s_album_link[i], genre: s_genre[i], artist: s_artist[i], label: s_label[i], release: s_release[i], language: s_language[i], english_lyric: s_english[i], hangul_lyric: s_hangul[i], romanized_lyric: s_romanized[i]})
         //songs.push({ id: i + 1, Album_ID: album_id[i], Name: s_name[i], Links: s_links[i], Album: s_album[i], Genre: s_genre[i], Artist: s_artist[i], Label: s_label[i], Release: s_release[i], Language: s_language[i], English_Lyrics: s_english[i], Hangul_Lyrics: s_hangul[i], Romanized_Lyrics: s_romanized[i]})
     }
     console.log('Songs Complete');
