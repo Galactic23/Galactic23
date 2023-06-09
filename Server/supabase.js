@@ -13,8 +13,8 @@ export const insertAlbumImports = async () => {
     console.error("Error inserting data into import_album table:", error);
   }
 
-  insertAlbums();
-  truncateImportAlbum();
+  await insertAlbums();
+  await truncateImportAlbum();
 };
 
 export const insertSongImports = async () => {
@@ -28,11 +28,14 @@ export const insertSongImports = async () => {
   } catch (error) {
     console.error("Error inserting data into import_song table:", error);
   }
+
+  await insertSongs();
+  await truncateImportSong();
 };
 
 export const truncateImportAlbum = async () => {
   try {
-    const { data: truncateResult, error: truncateError } = await supabase
+    const { data, error: truncateError } = await supabase
     .rpc('delete', { table_name: 'import_album' });
     if (truncateError) {
       console.error("Error deleting import_album table:", truncateError);
@@ -41,6 +44,20 @@ export const truncateImportAlbum = async () => {
     }
   } catch (error) {
     console.error("Error deleting import_album table:", error);
+  }
+};
+
+export const truncateImportSong = async () => {
+  try {
+    const { data: truncateResult, error: truncateError } = await supabase
+    .rpc('delete', { table_name: 'import_song' });
+    if (truncateError) {
+      console.error("Error deleting import_song table:", truncateError);
+    } else {
+      console.log('import_song table truncated')
+    }
+  } catch (error) {
+    console.error("Error deleting import_song table:", error);
   }
 };
 
@@ -84,5 +101,19 @@ export const insertAlbums = async () => {
     console.log('${insertResult.length} albums inserted into the albums table.');
   } catch (error) {
     console.error('Error inserting data into albums table:', error);
+  }
+};
+
+export const insertSongs = async () => {
+  try {
+    const { data, error: insertError } = await supabase
+    .rpc('insert_songs');
+    if (insertError) {
+      console.error("Error inserting import songs to songs table:", insertError);
+    } else {
+      console.log('import songs inserted into the songs table.')
+    }
+  } catch (error) {
+    console.error("Error inserting data into songs table:", error);
   }
 };
