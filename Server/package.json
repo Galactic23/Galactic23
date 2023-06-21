@@ -5,8 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "first-run": "nodemon Server/controller/first-data-insert.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon controller/index.js"
   },
   "keywords": [],
   "author": "",
