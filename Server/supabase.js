@@ -1,9 +1,13 @@
 import supabase from './config/supabaseClient.js';
-import { album_arr, songs_arr } from './controller/index.js';
+import { album } from './controller/albums.js';
+import { songs } from './controller/songs.js';
 
-export const insertAlbumImports = async () => {
+export const insertAlbumImports = async () => { //scrapes all webpages
   try {
-    const { data, error } = await supabase.from("import_album").upsert(album_arr);
+    let upsertAlbums;
+    upsertAlbums = await supabase.from("import_album").upsert(album);
+    const { data, error } = upsertAlbums;    
+
     if (error) {
       console.error("Error inserting data into import_album table:", error);
     } else {
@@ -17,9 +21,12 @@ export const insertAlbumImports = async () => {
   await truncateImportAlbum();
 };
 
-export const insertSongImports = async () => {
+export const insertSongImports = async () => { //scrapes all webpages
   try {
-    const { data, error } = await supabase.from("import_song").upsert(songs_arr);
+    let upsertSongs;
+    upsertSongs = await supabase.from("import_song").upsert(songs);
+    const { data, error } = upsertSongs;
+
     if (error) {
       console.error("Error inserting data into import_song table:", error);
     } else {
