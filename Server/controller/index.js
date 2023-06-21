@@ -1,5 +1,5 @@
 import express from 'express';
-import { getData1, songs } from './songs.js';
+import { songs, recentData } from './songs.js';
 import { album } from './albums.js';
 import albumRouter from '../routes/album-route.js';
 import songRouter from '../routes/song-route.js';
@@ -8,12 +8,8 @@ const app = express();
 const PORT = 8080;
 
 let url = "https://kgasa.com/album/page/";
-let songs_arr = [];
-let album_arr = [];
 
-getData1(url);
-album_arr = album;
-songs_arr = songs;
+recentData(url);
 
 app.get('/', (req, res) => {
     res.json('Welcome to Korean Lyric API')
@@ -38,4 +34,4 @@ app.listen(
 //   res.json(songs)
 //})
 
-export { album_arr, songs_arr };
+//export { album_arr, songs_arr };
