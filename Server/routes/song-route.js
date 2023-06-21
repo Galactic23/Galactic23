@@ -1,24 +1,12 @@
 import Router from 'express';
+import { logger } from './middleware.js'
+import supabase from '../config/supabaseClient.js';
 
-const myMiddleware = (req, res, next) => {
-    console.log(`Incoming request: ${req.method} ${req.url}`);
+const songRouter = Router();
 
-    // Perform some authentication logic
-    if (!req.headers.authorization) {
-        // If authorization header is missing, send an error response
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
+songRouter.use(logger);
 
-    // Modify the request object by adding a custom property
-    req.customProperty = 'Custom value';
-    next();
-};
-
-const router = Router();
-
-router.use(myMiddleware);
-
-router.get('/songs', async (req, res) => {
+songRouter.get('/songs', async (req, res) => {
     try {
         const {data: songs, error } = await supabase.from('songs').select('*');
         if (error) {
@@ -31,4 +19,4 @@ router.get('/songs', async (req, res) => {
     }
 });
 
-export default { router }
+export default songRouter;
