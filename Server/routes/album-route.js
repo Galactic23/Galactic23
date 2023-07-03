@@ -3,8 +3,6 @@ import supabase from '../config/supabaseClient.js';
 
 const albumRouter = Router();
 
-//albumRouter.use(logger);
-
 albumRouter.get('/albums', async (req, res) => {
     try {
         const {data: albums, error } = await supabase.from('albums').select('*');
