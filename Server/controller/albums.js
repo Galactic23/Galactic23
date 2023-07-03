@@ -34,7 +34,7 @@ export async function getData(url)
             if ($('.entry-title-link').length != 0)    //if title album data is not 0 extract data (albums exist in page)
             {
                 total_pages.push(temp); //finding total pages of albums
-                console.log(total_pages);
+                //console.log(total_pages); for debug
                 counter++;
 
                 let temp_names = ($('.entry-title-link').get().map(x => $(x).text())); //array of albums in page
@@ -171,7 +171,7 @@ export async function recentAlbumData(url)
             if ($('.entry-title-link').length != 0)    //if title album data is not 0 extract data (albums exist in page)
             {
                 total_pages.push(temp); //finding total pages of albums
-                console.log(total_pages);
+                //console.log(total_pages); for debug
                 counter++;
 
                 let temp_names = ($('.entry-title-link').get().map(x => $(x).text())); //array of albums in page
@@ -273,8 +273,8 @@ export async function recentAlbumData(url)
         }
     }
 
-    console.log(songs.length);
-    console.log(a_names.length);
+    console.log('Albums: ', songs.length);
+    console.log('Songs: ', a_names.length);
 
     for (let i = 0; i < songs.length; i++)
     {
