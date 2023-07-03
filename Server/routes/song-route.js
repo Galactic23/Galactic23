@@ -1,14 +1,16 @@
 import Router from 'express';
-import { logger } from './middleware.js'
 import supabase from '../config/supabaseClient.js';
 
 const songRouter = Router();
 
-songRouter.use(logger);
+//songRouter.use(logger);
 
 songRouter.get('/songs', async (req, res) => {
+    const { page, limit } = req.query;
+    const offset = (page - 1) * limit;
+
     try {
-        const {data: songs, error } = await supabase.from('songs').select('*');
+        const {data: songs, error } = await supabase.from('songs').select('*').range(offset, offset + limit - 1);
         if (error) {
             throw error;
         }
