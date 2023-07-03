@@ -20,15 +20,3 @@ app.listen(
     PORT,
     () => console.log(`server running on http://localhost:${PORT}`)
 );
-
-//app.get('/album', (req, res) => 
-//{
-//    res.json(album);
-//});
-
-//app.get('/songs', (req, res) => 
-//{
-//   res.json(songs)
-//})
-
-//export { album_arr, songs_arr };
