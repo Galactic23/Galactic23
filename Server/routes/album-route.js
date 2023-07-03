@@ -1,10 +1,9 @@
 import Router from 'express';
-import { logger } from './middleware.js'
 import supabase from '../config/supabaseClient.js';
 
 const albumRouter = Router();
 
-albumRouter.use(logger);
+//albumRouter.use(logger);
 
 albumRouter.get('/albums', async (req, res) => {
     try {
