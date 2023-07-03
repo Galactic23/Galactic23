@@ -2,6 +2,7 @@
   "name": "korean-lyrics",
   "private": true,
   "version": "0.0.0",
+  "proxy": "http://localhost:3000",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,15 +12,22 @@
     "build:css": "tailwindcss build src/index.css"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.7.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@supabase/supabase-js": "^2.24.0",
     "axios": "^1.4.0",
+    "chakra": "^0.0.3",
     "cheerio": "^1.0.0-rc.12",
+    "framer-motion": "^10.12.18",
     "node": "^20.2.0",
     "nodemon": "^2.0.22",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1",
     "regex": "^0.1.1",
-    "supabase": "^1.64.8"
+    "supabase": "^1.64.8",
+    "tailwind": "^4.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
