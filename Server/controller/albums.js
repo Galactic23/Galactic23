@@ -54,6 +54,17 @@ export async function getData(url)
         }
     }
 
+    for (let i = 0; i < a_names.length; i++) //tidy up names
+    {
+        if (a_names[i].includes('–')) 
+        {
+            const delimiter = "–"
+            const parts = a_names[i].split(delimiter);
+            const newName = parts.slice(1).join(delimiter).trim();
+            a_names[i] = newName;
+        }
+    }
+
     for (let i = 0; i < a_links.length; i++)
     {
         try
@@ -136,8 +147,8 @@ export async function getData(url)
         }
     }
 
-    console.log(songs.length);
-    console.log(a_names.length);
+    console.log('Albums: ', a_names.length);
+    console.log('Songs: ', songs.length);
 
     for (let i = 0; i < songs.length; i++)
     {
@@ -191,6 +202,17 @@ export async function recentAlbumData(url)
         }
     }
 
+    for (let i = 0; i < a_names.length; i++) //tidy up names
+    {
+        if (a_names[i].includes('–')) 
+        {
+            const delimiter = "–"
+            const parts = a_names[i].split(delimiter);
+            const newName = parts.slice(1).join(delimiter).trim();
+            a_names[i] = newName;
+        }
+    }
+
     for (let i = 0; i < a_links.length; i++)
     {
         try
@@ -273,8 +295,8 @@ export async function recentAlbumData(url)
         }
     }
 
-    console.log('Albums: ', songs.length);
-    console.log('Songs: ', a_names.length);
+    console.log('Albums: ', a_names.length);
+    console.log('Songs: ', songs.length);
 
     for (let i = 0; i < songs.length; i++)
     {
