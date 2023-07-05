@@ -7,6 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage.jsx';
+import Container from './components/common/container.jsx';
 
 const container = document.getElementById('app')
 const root = createRoot(container)
@@ -17,16 +18,18 @@ root.render(
       <CSSReset />
       <ChakraProvider>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-          <Routes>
-            <Route 
-              path="/"
-              element={
-                <HomePage />
-              }
-            />
+          <Container>
+            <Routes>
+              <Route 
+                path="/"
+                element={
+                  <HomePage />
+                }
+              />
 
-
-          </Routes>
+            
+            </Routes>
+          </Container>
       </ChakraProvider>
     </ThemeProvider>
   </BrowserRouter>
