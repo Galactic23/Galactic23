@@ -6,6 +6,7 @@ import { insertSongImports } from '../supabase.js';
 import { album_id } from './albums.js';
 
 const songs = [];
+let s_id = [];
 let s_links = [];
 let s_name = [];
 let s_cover = [];
@@ -36,6 +37,8 @@ export async function getData1(url)
             const data = response.data;
             const $ = load(data);
 
+            s_id.push(s_links.length - i);
+
             let temp = ($('.entry-header h1').first().html()); //.text()
             temp = temp.replace(/&nbsp;/g, " ");
 
@@ -49,7 +52,7 @@ export async function getData1(url)
             s_name.push(temp2);
             s_artist.push(t[0]); 
 
-            //console.log('Song #' + String(i) + ':', s_artist[i], ' - ', s_name[i]);
+            console.log('Song #' + s_id[i] + ':', s_artist[i], ' - ', s_name[i]);
 
             if (temp2.includes('Wishes') || temp2.includes('Anymore')) //using this to debug
             {
@@ -261,7 +264,7 @@ export async function getData1(url)
 
     for (let i = 0; i < s_links.length; i++)
     {
-        songs.push({ id: i + 1, name: s_name[i], link: s_links[i], cover: s_cover[i], album_name: s_album_name[i], album_link: s_album_link[i], genre: s_genre[i], artist: s_artist[i], label: s_label[i], release: s_release[i], language: s_language[i], english_lyric: s_english[i], hangul_lyric: s_hangul[i], romanized_lyric: s_romanized[i]})
+        songs.push({ id: s_id[i], name: s_name[i], link: s_links[i], cover: s_cover[i], album_name: s_album_name[i], album_link: s_album_link[i], genre: s_genre[i], artist: s_artist[i], label: s_label[i], release: s_release[i], language: s_language[i], english_lyric: s_english[i], hangul_lyric: s_hangul[i], romanized_lyric: s_romanized[i]})
         //songs.push({ id: i + 1, Album_ID: album_id[i], Name: s_name[i], Links: s_links[i], Album: s_album[i], Genre: s_genre[i], Artist: s_artist[i], Label: s_label[i], Release: s_release[i], Language: s_language[i], English_Lyrics: s_english[i], Hangul_Lyrics: s_hangul[i], Romanized_Lyrics: s_romanized[i]})
     }
     console.log('Songs Complete');
@@ -297,7 +300,7 @@ export async function recentData(url)
             s_name.push(temp2);
             s_artist.push(t[0]); 
 
-            //console.log('Song #' + String(i) + ':', s_artist[i], ' - ', s_name[i]);
+            console.log('Song #' + String(i) + ':', s_artist[i], ' - ', s_name[i]); //for debugging
 
             if (temp2.includes('Wishes') || temp2.includes('Anymore')) //using this to debug
             {
@@ -507,9 +510,9 @@ export async function recentData(url)
         }
     }
 
-    for (let i = 0; i < s_links.length; i++)
+    for (let i = 0; i < s_links.length; i++) 
     {
-        songs.push({ id: i + 1, name: s_name[i], link: s_links[i], cover: s_cover[i], album_name: s_album_name[i], album_link: s_album_link[i], genre: s_genre[i], artist: s_artist[i], label: s_label[i], release: s_release[i], language: s_language[i], english_lyric: s_english[i], hangul_lyric: s_hangul[i], romanized_lyric: s_romanized[i]})
+        songs.push({ id: s_id[i], name: s_name[i], link: s_links[i], cover: s_cover[i], album_name: s_album_name[i], album_link: s_album_link[i], genre: s_genre[i], artist: s_artist[i], label: s_label[i], release: s_release[i], language: s_language[i], english_lyric: s_english[i], hangul_lyric: s_hangul[i], romanized_lyric: s_romanized[i]})
         //songs.push({ id: i + 1, Album_ID: album_id[i], Name: s_name[i], Links: s_links[i], Album: s_album[i], Genre: s_genre[i], Artist: s_artist[i], Label: s_label[i], Release: s_release[i], Language: s_language[i], English_Lyrics: s_english[i], Hangul_Lyrics: s_hangul[i], Romanized_Lyrics: s_romanized[i]})
     }
     console.log('Songs Complete');
