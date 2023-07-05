@@ -5,7 +5,7 @@ const albumRouter = Router();
 
 albumRouter.get('/albums', async (req, res) => {
     try {
-        const {data: albums, error } = await supabase.from('albums').select('*');
+        const {data: albums, error } = await supabase.from('albums').select('*').order('id', { ascending: true });
         if (error) {
             throw error;
         }
