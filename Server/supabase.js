@@ -2,7 +2,7 @@ import supabase from './config/supabaseClient.js';
 import { album } from './controller/albums.js';
 import { songs } from './controller/songs.js';
 
-export const insertAlbumImports = async () => { //scrapes all webpages
+export const insertAlbumImports = async () => { 
   try {
     let upsertAlbums;
     upsertAlbums = await supabase.from("import_album").upsert(album);
@@ -21,7 +21,7 @@ export const insertAlbumImports = async () => { //scrapes all webpages
   await truncateImportAlbum();
 };
 
-export const insertSongImports = async () => { //scrapes all webpages
+export const insertSongImports = async () => { 
   try {
     let upsertSongs;
     upsertSongs = await supabase.from("import_song").upsert(songs);
@@ -73,7 +73,7 @@ export const insertAlbums = async () => {
     // Get the data from the import table
     const { data: importData, error: importError } = await supabase
       .from('import_album')
-      .select('id, name, album, cover, genre, artist, release');
+      .select('id, name, album, cover, genre, artist, release').order('id', { ascending: true });
     
     if (importError) {
       throw importError;
@@ -97,15 +97,22 @@ export const insertAlbums = async () => {
     }
 
     // Insert data into the albums table
-    const { data: insertResult, error: insertError } = await supabase
+    /*const { data: insertResult, error: insertError } = await supabase
       .from('albums')
-      .insert(importData, { returning: minimal });
+      .insert(importData, { returning: 'minimal' });*/
+      const {data: insertResult, error: insertError } = await supabase
+      .from('albums')
+      .insert(newAlbums.map((row) => ({
+        import_album_id: row.id,
+        name: row.name,
+        album: row.album,
+        cover: row.cover,
+        genre: row.genre,
+        artist: row.artist,
+        release: row.release
+      })));
     
-    if (insertError) {
-      throw insertError;
-    }
-    
-    console.log('${insertResult.length} albums inserted into the albums table.');
+    //console.log(`import albums inserted into the albums table.`);
   } catch (error) {
     console.error('Error inserting data into albums table:', error);
   }
