@@ -10,7 +10,7 @@ songRouter.get('/songs', async (req, res) => {
     const offset = (page - 1) * limit;
 
     try {
-        const {data: songs, error } = await supabase.from('songs').select('*').range(offset, offset + limit - 1);
+        const {data: songs, error } = await supabase.from('songs').select('*').order('id', { ascending: true }).range(offset, offset + limit - 1);
         if (error) {
             throw error;
         }
