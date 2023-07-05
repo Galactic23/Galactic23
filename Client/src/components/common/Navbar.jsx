@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
+  Link,
   useDisclosure,
   Flex,
   Text,
@@ -43,21 +44,41 @@ import {
   Card,
   CardBody,
   Skeleton,
-  GridItem
+  GridItem,
+  VStack
 } from '@chakra-ui/react';
 
 const NavBar = () => {
     return (
         <>
-            <Flex flexDir="column"
-                px={{ base: '1rem', lg: '1rem' }}
-                w={'full'}
-                mt={{ base: '0rem', lg: '1rem' }}
-                gap="4">
-                <Box bg="black" display={{ base: 'none', lg: 'block' }}>
-                    <Text>Hello</Text>
+            <Flex flexDir={{ base: 'row', lg: 'column' }}
+                display={{ base: "none", lg: 'flex'}}
+                w={{ base: 'full', lg: '14rem' }}
+                h={{ base: '5rem', lg: '100vh' }}
+                bg={"white"}>
+                <Box bg="blue" display={'flex'} p="1rem" h={{ base: 'full', lg: 'auto' }}>
+                    <Link to="/" _hover={{ textDecoration: 'none' }}>
+                        <Box
+                            display="flex"
+                            h={{ base: 'full', lg: '4.5rem' }}
+                            w={{ base: 'full', lg: '11.5rem'}}
+                            rounded="18"
+                            bg="white"
+                            alignItems='center'
+                            justifyContent={{ base: 'center', lg: 'center' }}>
+                            <Image
+                                boxSize={{ base: '50px', lg: '70px' }}
+                                src="src/assets/finger-heart.png"
+                                justifyContent={'left'}
+                                mr="-10px"
+                            />
+                            <Text fontWeight={"extrabold"} fontSize={"30px"} fontFamily="Aktifo B" textColor={'purple.400'}>Myuzige</Text>
+                        </Box>
+                    </Link>
                 </Box>
-            
+                <VStack>
+                    <Text textColor={"purple"}> Hello </Text>
+                </VStack>
             
 
             </Flex>
