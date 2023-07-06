@@ -1,25 +1,19 @@
 import React from 'react';
 import Navbar from './Navbar.jsx'
-import { Flex } from '@chakra-ui/react';
 import { useColorModeValue } from '@chakra-ui/react';
 
 const Container = (props) => {
-  const bg = useColorModeValue('white', 'gray.800');
+  const bg = 'bg-white dark:gray.800';
   return (
     <>
       <header>
         <Navbar />
       </header>
-      <Flex bg={bg} justifyContent={'center'} pl={{ base: '0rem', lg: '6rem' }}>
-        <Flex
-          w={'full'}
-          minH={'100vh'}
-          mt={{ base: '4rem', lg: '0rem' }}
-          justifyContent="center"
-          maxW={'1440px'}>
+      <div className="bg-yellow-300 flex justify-center pl-0 lg:pl-6">
+        <div className="w-full min-h-screen mt-16 lg:mt-0 justify-center max-w-7xl mx-auto">
           {props.children}
-        </Flex>
-      </Flex>
+        </div>
+      </div>
     </>
   );
 };
