@@ -19,7 +19,7 @@ albumRouter.get('/albums', async (req, res) => {
 
 newAlbums.get('/recent_albums', async (req, res) => {
     try {
-        const {data: recentAlbums, error: recentAlbumsError} = await supabase.from('albums').select('*').order('id', { ascending: false }).limit(15);
+        const {data: recentAlbums, error: recentAlbumsError} = await supabase.from('albums').select('*').order('release', { ascending: false }).limit(15);
         if (recentAlbumsError) {
             throw recentAlbumsError;
         }
