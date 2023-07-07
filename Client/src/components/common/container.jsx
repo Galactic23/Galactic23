@@ -1,17 +1,18 @@
 import React from 'react';
-import Navbar from './Navbar.jsx'
-import { useColorModeValue } from '@chakra-ui/react';
+import NavBar from './Navbar.jsx'
 
 const Container = (props) => {
   const bg = 'bg-white dark:gray.800';
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
-      <div className="bg-yellow-300 flex justify-center pl-0 lg:pl-6">
-        <div className="w-full min-h-screen mt-16 lg:mt-0 justify-center max-w-7xl mx-auto">
-          {props.children}
+      <div className='flex bg-white-100 '>
+        <header className='w-[18rem] min-h-screen border border-gray-300'>
+          <NavBar />
+        </header>
+        <div className="bg-gray-200 w-screen flex justify-center pl-0">
+          <div className="w-full min-h-screen lg:mt-0 justify-center max-w-8xl mx-auto">
+            {props.children}
+          </div>
         </div>
       </div>
     </>
