@@ -24,7 +24,7 @@ songRouter.get('/songs', async (req, res) => {
 
 newSongs.get('/recent_songs', async (req, res) => {
     try {
-        const {data: recentSongs, error: recentSongsError} = await supabase.from('songs').select('id, albums_id, import_song_id, name, link, cover, album_name, album_link, genre, artist, label, release, language').order('id', { ascending: false }).limit(15);
+        const {data: recentSongs, error: recentSongsError} = await supabase.from('songs').select('id, albums_id, import_song_id, name, link, cover, album_name, album_link, genre, artist, label, release, language').order('release', { ascending: false }).limit(15);
         if (recentSongsError) {
             throw recentSongsError;
         }
