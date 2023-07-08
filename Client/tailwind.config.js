@@ -12,7 +12,7 @@ export default {
       'md': '1080px',
       // => @media (min-width: 960px) { ... }
 
-      'lg': '2560px',
+      'lg': '1440px',
       // => @media (min-width: 1440px) { ... }
     },
   },
