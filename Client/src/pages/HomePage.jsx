@@ -1,11 +1,14 @@
 import React from 'react';
 import useFetchNewAlbums from '../../APIs/useNewAlbums';
 import useFetchNewSongs from '../../APIs/useNewSongs';
+import useFetchNewAlbumsOST from '../../APIs/useNewAlbumsOST';
 import AlbumSlider from '../components/Home/albumSlider';
 import SongSlider from '../components/Home/songSlider';
+import OSTAlbumSlider from '../components/Home/ostAlbumSlider';
 
 const HomePage = () => {
     const { albums, errorAlbum, loadingAlbum} = useFetchNewAlbums();
+    const { ostAlbums, errorAlbumOST, loadingAlbumOST } = useFetchNewAlbumsOST();
     const { songs, errorSong, loadingSong } = useFetchNewSongs();
 
     if (loadingSong) {
@@ -23,12 +26,15 @@ const HomePage = () => {
 
     return (
         <>
-            <div className='flex flex-row justify-center lg:max-w-full h-[40%]'>
-                
-            </div>
-            <div className="grid grid-rows-auto px-[1%] gap-10" style={{ marginTop: '-3rem' }}>
-                <AlbumSlider albums={albums} />
-                <SongSlider songs={songs} />
+            <div className='flex flex-col lg:min-h-screen justify-center px-[2%] gap-y-14'> 
+                <div className='flex flex-row justify-center min-h-[20rem] py-5'>
+                    
+                </div>
+                <div className="grid grid-rows-auto gap-10 justfiy-end lg:min-h-[50rem]" style={{ marginTop: '-3rem' }}>
+                    <AlbumSlider albums={albums} />
+                    {/* <OSTAlbumSlider ostAlbums={ostAlbums} /> */}
+                    <SongSlider songs={songs} />
+                </div>
             </div>
         </>
     );
