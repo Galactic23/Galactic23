@@ -1,5 +1,5 @@
 import express from 'express';
-import { newAlbums, albumRouter } from './routes/album-route.js';
+import { newAlbums, albumRouter, newAlbumsOST } from './routes/album-route.js';
 import { newSongs, songRouter } from './routes/song-route.js';
 import { recentData } from './controller/songs.js';
 import { getData1 } from './controller/songs.js';
@@ -17,6 +17,7 @@ app.use(express.json());
 
 app.use('/api', albumRouter);
 app.use('/api', newAlbums)
+app.use('/api', newAlbumsOST);
 app.use('/api', songRouter);
 app.use('/api', newSongs);
 
