@@ -1,7 +1,7 @@
 import React from 'react';
-import useFetchNewAlbums from '../../APIs/useNewAlbums';
-import useFetchNewSongs from '../../APIs/useNewSongs';
-import useFetchNewAlbumsOST from '../../APIs/useNewAlbumsOST';
+import useFetchNewAlbums from '../../hooks/useNewAlbums';
+import useFetchNewSongs from '../../hooks/useNewSongs';
+import useFetchNewAlbumsOST from '../../hooks/useNewAlbumsOST';
 import AlbumSlider from '../components/Home/albumSlider';
 import SongSlider from '../components/Home/songSlider';
 import OSTAlbumSlider from '../components/Home/ostAlbumSlider';
@@ -11,12 +11,9 @@ const HomePage = () => {
     const { ostAlbums, errorAlbumOST, loadingAlbumOST } = useFetchNewAlbumsOST();
     const { songs, errorSong, loadingSong } = useFetchNewSongs();
 
-    if (loadingSong) {
-        return <div>Loading...</div>
-    }
-    if (loadingAlbum) {
+    if (loadingSong || loadingAlbum || loadingAlbumOST) {
         return <div>Loading...</div>;
-    }
+      }
     if (errorSong) {
         return <div> Error: {errorSong.message} </div>
     }
