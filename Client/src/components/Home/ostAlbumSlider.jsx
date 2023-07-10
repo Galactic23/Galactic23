@@ -6,6 +6,10 @@ import { Sparkle, DotIcon } from 'lucide-react';
 const OSTAlbumSlider = ({ ostAlbums }) => {
   const scrollContainerRef = React.useRef(null);
 
+  if (!ostAlbums || ostAlbums.length === 0) {
+    return <div>No OST albums available.</div>;
+  }
+
   const handleScrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
