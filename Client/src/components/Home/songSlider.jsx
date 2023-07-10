@@ -27,7 +27,7 @@ const SongSlider = ({ songs }) => {
     <div className="flex flex-col gap-4 rounded-lg bg-gray-100 h-auto lg:max-w-full overflow-x-auto">
       <div className='flex ml-[2.5%] justify-left'>
         <Sparkle size={'35px'} color='blue'/>
-        <h2 className='px-4 font-mono font-semibold text-[25px]'>Recent OST Releases</h2>
+        <h2 className='px-4 font-serif font-semibold text-[25px]'>Recent OST Releases</h2>
       </div>
       <div className="flex flex-row gap-4 items-center rounded-lg bg-gray-200 h-auto lg:max-w-full overflow-x-auto">
         <button
@@ -37,7 +37,7 @@ const SongSlider = ({ songs }) => {
           <ChevronLeftIcon className="h-5 w-5" />
         </button>
         <div className="flex overflow-x-auto whitespace-nowrap space-x-4 mt-4 mb-4 rounded-lg" ref={scrollContainerRef}>
-          {songs.map((song) => (
+          {songs.map((song) => ( 
             <div
               key={song.id}
               className="flex flex-col bg-gray-100 p-4 rounded-md truncate border border-gray-300 shadow-lg"
