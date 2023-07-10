@@ -29,7 +29,7 @@ const AlbumSlider = ({ albums }) => {
     <div className="flex flex-col gap-4 rounded-lg bg-gray-100 h-auto overflow-x-auto">
       <div className='flex ml-[2.5%] justify-left'>
         <Sparkle size={'35px'} color='blue'/>
-        <h2 className='px-4 font-mono font-semibold text-[25px]'>Recent Album Releases</h2>
+        <h2 className='px-4 font-serif font-semibold text-[25px]'>Recent Album Releases</h2>
       </div>
       <div className="flex flex-row gap-4 items-center rounded-lg bg-gray-200 h-auto relative" >
         <button
