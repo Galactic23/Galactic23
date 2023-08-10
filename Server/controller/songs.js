@@ -287,6 +287,8 @@ export async function recentData(url)
             const data = response.data;
             const $ = load(data);
 
+            s_id.push(s_links.length - i);
+
             let temp = ($('.entry-header h1').first().html()); //.text()
             temp = temp.replace(/&nbsp;/g, " ");
 
@@ -300,7 +302,7 @@ export async function recentData(url)
             s_name.push(temp2);
             s_artist.push(t[0]); 
 
-            console.log('Song #' + String(i) + ':', s_artist[i], ' - ', s_name[i]); //for debugging
+            console.log('Song #' + s_id[i] + ':', s_artist[i], ' - ', s_name[i]); //for debugging
 
             if (temp2.includes('Wishes') || temp2.includes('Anymore')) //using this to debug
             {
